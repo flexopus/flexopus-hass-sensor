@@ -1,0 +1,24 @@
+import logging
+
+import aiohttp
+
+_LOGGER = logging.getLogger(__name__)
+
+
+class Api:
+    def __init__(self, base_url, access_token):
+        self.base_url = base_url
+        self.access_token = access_token
+
+    async def fetch_location(self, location_id):
+        headers = {
+            "Accept": "application/json",
+            "Authorization": f"Bearer {self.access_token}",
+        }
+
+        url = f"{self.base_url}/locations/{location_id}/bookables/occupancy"
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers) as response:
+                response.raise_for_status()
+                return await response.json()
