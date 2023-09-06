@@ -29,7 +29,6 @@ async def async_setup_platform(
 
     await coordinator.async_config_entry_first_refresh()
 
-    _LOGGER.warning(coordinator.data.items())
     async_add_entities(
         (
             FlexopusSensor(coordinator, idx)
@@ -46,7 +45,6 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     def __init__(self, coordinator, idx) -> None:
         super().__init__(coordinator, context=idx)
         self.idx = idx
-        _LOGGER.warning(idx)
         self.data = self.coordinator.data[self.idx]
         self.update_data()
 

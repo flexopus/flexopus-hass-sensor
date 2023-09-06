@@ -10,16 +10,15 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.const import (
     CONF_ACCESS_TOKEN,
     CONF_PATH,
-    CONF_URL,
 )
 from .const import DOMAIN
 
 from .api import Api
-from .const import BASE_API_URL
 from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
+CONF_TENANT_URL = "url"
 CONF_LOCATION = "locations"
 BUILDING_SCHEMA = vol.Schema({vol.Required(CONF_PATH): cv.string})
 
@@ -29,7 +28,7 @@ CONFIG_SCHEMA = vol.Schema(
             {
                 vol.Required(CONF_ACCESS_TOKEN): cv.string,
                 vol.Required(CONF_LOCATION): cv.ensure_list,
-                vol.Optional(CONF_URL): cv.url,
+                vol.Required(CONF_TENANT_URL): cv.url
             }
         )
     },
@@ -45,12 +44,12 @@ async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
     """
     conf = config[DOMAIN]
 
-    api = Api(
-        BASE_API_URL,
-        conf[CONF_ACCESS_TOKEN],
+    flexopus_api = Api(
+        conf[CONF_TENANT_URL],
+        conf[CONF_ACCESS_TOKEN]
     )
 
-    coordinator = DataCoordinator(hass, api, conf[CONF_LOCATION])
+    coordinator = DataCoordinator(hass, flexopus_api, conf[CONF_LOCATION])
 
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_refresh()
