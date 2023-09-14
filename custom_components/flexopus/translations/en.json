@@ -1,0 +1,18 @@
+{
+  "config": {
+    "error": {
+      "auth": "The auth token or Tenant URL provided is not valid.",
+      "invalid_path": "The path provided is not valid. Should be in the format `user/repo-name`."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "access_token": "Flexopus Access Token",
+          "url": "Flexopus tenant URL"
+        },
+        "description": "Enter your Flexopus API token.",
+        "title": "Authentication"
+      }
+    }
+  }
+}

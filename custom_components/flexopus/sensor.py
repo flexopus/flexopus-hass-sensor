@@ -3,39 +3,52 @@ from __future__ import annotations
 
 import logging
 
+from homeassistant import config_entries
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntity,
 )
 from homeassistant.core import callback
+from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_platform(
+async def async_setup_entry(
         hass: HomeAssistant,
-        config: ConfigType,
-        async_add_entities: AddEntitiesCallback,
-        discovery_info: DiscoveryInfoType | None = None,
-) -> None:
-    coordinator = hass.data[DOMAIN]["coordinator"]
+        config_entry: config_entries.ConfigEntry,
+        async_add_entities,
+):
+    coordinator = hass.data[DOMAIN][config_entry.entry_id]
+    current_sensors = []
 
-    await coordinator.async_config_entry_first_refresh()
+    # Create a callback function to update the sensors when the coordinator data changes
+    def coordinator_data_update_callback():
+        nonlocal current_sensors
+        current_sensors_list = list(current_sensors)
 
-    async_add_entities(
-        (
-            FlexopusSensor(coordinator, idx)
-            for idx, ent in coordinator.data.items()
-        ),
-        update_before_add=True,
-    )
+        current_sensor_ids = set(key for key, _ in current_sensors_list)
+        new_sensor_ids = set(key for key, _ in coordinator.data.items())
+
+        # removed_items = [key for key, value in current_sensors_list if key not in new_sensor_ids]
+        added_items = [key for key, value in coordinator.data.items() if key not in current_sensor_ids]
+
+        async_add_entities(
+            (
+                FlexopusSensor(coordinator, idx)
+                for idx in added_items
+            ),
+            update_before_add=True,
+        )
+
+        current_sensors = coordinator.data.items()
+
+    coordinator.async_add_listener(coordinator_data_update_callback)
 
 
 class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
@@ -57,7 +70,26 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
+        if self.idx not in self.coordinator.data:
+            return
+
         self.data = self.coordinator.data[self.idx]
         self.update_data()
 
+        _LOGGER.debug(self.idx)
+
         self.async_write_ha_state()
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Return the device info."""
+        return DeviceInfo(
+            identifiers={
+                (DOMAIN, self.data['id'])
+            },
+            suggested_area=self.data['location_name'],
+            name=self.name,
+            manufacturer="Flexopus",
+            model=self.data['type'],
+            sw_version="1.0.0",
+        )

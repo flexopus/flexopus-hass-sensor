@@ -21,6 +21,7 @@ class DataCoordinator(DataUpdateCoordinator):
         self.location_ids = location_ids
 
     async def update_method(self):
+        self.bookables = {}
         for idx, ent in enumerate(self.location_ids):
             data = await self.api.fetch_location(ent)
             for elem in data['data']:
