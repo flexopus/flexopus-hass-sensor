@@ -41,11 +41,6 @@ class Api:
         tenant_url = tenant_url.strip()
         parsed_url = urlparse(tenant_url)
 
-        return urlunparse((
-            parsed_url.scheme,
-            parsed_url.netloc,
-            '/api/v1',
-            None,
-            None,
-            None
-        ))
+        return urlunparse(
+            (parsed_url.scheme, parsed_url.netloc, "/api/v1", None, None, None)
+        )

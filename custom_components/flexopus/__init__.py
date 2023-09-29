@@ -24,7 +24,7 @@ BUILDING_SCHEMA = vol.Schema({vol.Required(CONF_PATH): cv.string})
 
 
 async def async_setup_entry(
-        hass: core.HomeAssistant, entry: config_entries.ConfigEntry
+    hass: core.HomeAssistant, entry: config_entries.ConfigEntry
 ) -> bool:
     """Set up platform from a ConfigEntry."""
     hass.data.setdefault(DOMAIN, {})
@@ -33,7 +33,7 @@ async def async_setup_entry(
 
     flexopus_api = Api(
         hass.data[DOMAIN][entry.entry_id][CONF_TENANT_URL],
-        hass.data[DOMAIN][entry.entry_id][CONF_ACCESS_TOKEN]
+        hass.data[DOMAIN][entry.entry_id][CONF_ACCESS_TOKEN],
     )
     coordinator = DataCoordinator(hass, flexopus_api, [1, 2])
     # Fetch initial data so we have data when entities subscribe

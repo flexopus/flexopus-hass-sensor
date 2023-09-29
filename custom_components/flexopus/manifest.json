@@ -1,11 +1,13 @@
 {
-  "codeowners": ["@user"],
+  "codeowners": [
+    "@flexopus"
+  ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/user/my_component/",
+  "documentation": "https://github.com/flexopus/flexopus-hass-sensor",
   "domain": "flexopus",
-  "iot_class": "calculated",
-  "name": "Flexopus Occupancy Sensor",
+  "iot_class": "cloud_poll",
+  "name": "Flexopus",
   "requirements": [],
   "version": "1.0.0"
 }

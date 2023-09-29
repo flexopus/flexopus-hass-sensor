@@ -15,7 +15,7 @@ class DataCoordinator(DataUpdateCoordinator):
             _LOGGER,
             name=DOMAIN,
             update_interval=SCAN_INTERVAL,
-            update_method=self.update_method
+            update_method=self.update_method,
         )
         self.api = api
         self.location_ids = location_ids
@@ -24,7 +24,7 @@ class DataCoordinator(DataUpdateCoordinator):
         self.bookables = {}
         for idx, ent in enumerate(self.location_ids):
             data = await self.api.fetch_location(ent)
-            for elem in data['data']:
-                self.bookables[elem['id']] = elem
+            for elem in data["data"]:
+                self.bookables[elem["id"]] = elem
 
         return self.bookables

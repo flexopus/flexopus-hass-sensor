@@ -20,9 +20,9 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
-        hass: HomeAssistant,
-        config_entry: config_entries.ConfigEntry,
-        async_add_entities,
+    hass: HomeAssistant,
+    config_entry: config_entries.ConfigEntry,
+    async_add_entities,
 ):
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
     current_sensors = []
@@ -36,13 +36,14 @@ async def async_setup_entry(
         new_sensor_ids = set(key for key, _ in coordinator.data.items())
 
         # removed_items = [key for key, value in current_sensors_list if key not in new_sensor_ids]
-        added_items = [key for key, value in coordinator.data.items() if key not in current_sensor_ids]
+        added_items = [
+            key
+            for key, value in coordinator.data.items()
+            if key not in current_sensor_ids
+        ]
 
         async_add_entities(
-            (
-                FlexopusSensor(coordinator, idx)
-                for idx in added_items
-            ),
+            (FlexopusSensor(coordinator, idx) for idx in added_items),
             update_before_add=True,
         )
 
@@ -84,12 +85,10 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     def device_info(self) -> DeviceInfo:
         """Return the device info."""
         return DeviceInfo(
-            identifiers={
-                (DOMAIN, self.data['id'])
-            },
-            suggested_area=self.data['location_name'],
+            identifiers={(DOMAIN, self.data["id"])},
+            suggested_area=self.data["location_name"],
             name=self.name,
             manufacturer="Flexopus",
-            model=self.data['type'],
+            model=self.data["type"],
             sw_version="1.0.0",
         )
