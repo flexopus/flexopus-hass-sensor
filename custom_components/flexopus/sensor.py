@@ -63,10 +63,18 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
         self.update_data()
 
     def update_data(self):
-        self._attr_name = self.data["name"]
+        self._attr_name = "Occupancy"
         self._attr_is_on = self.data["occupied"]
         self._attr_unique_id = self.data["id"]
         self._attr_device_class = BinarySensorDeviceClass.OCCUPANCY
+        self._attr_extra_state_attributes = {"next_booking": None}
+        # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
+        if self.data["type"] == 'Desk':
+            self._attr_icon = "mdi:desk"
+        if self.data["type"] == 'Parking_Space':
+            self._attr_icon = "mdi:parking"
+        if self.data["type"] == 'Meeting_Room':
+            self._attr_icon = "mdi:door"
 
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -87,7 +95,7 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
         return DeviceInfo(
             identifiers={(DOMAIN, self.data["id"])},
             suggested_area=self.data["location_name"],
-            name=self.name,
+            name=self.data["location_name"] + " " + self.data["name"],
             manufacturer="Flexopus",
             model=self.data["type"],
             sw_version="1.0.0",
