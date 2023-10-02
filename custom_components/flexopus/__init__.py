@@ -35,7 +35,7 @@ async def async_setup_entry(
         hass.data[DOMAIN][entry.entry_id][CONF_TENANT_URL],
         hass.data[DOMAIN][entry.entry_id][CONF_ACCESS_TOKEN],
     )
-    coordinator = DataCoordinator(hass, flexopus_api, [1, 2])
+    coordinator = DataCoordinator(hass, flexopus_api, hass.data[DOMAIN][entry.entry_id][CONF_LOCATION])
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_config_entry_first_refresh()
     hass.data[DOMAIN][entry.entry_id] = coordinator
