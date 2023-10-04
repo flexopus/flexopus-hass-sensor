@@ -26,55 +26,58 @@ async def async_setup_entry(
 ):
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
     async_add_entities(
-        FlexopusSensor(coordinator, idx) for idx, ent in enumerate(coordinator.data)
+        FlexopusSensor(coordinator, key) for key in coordinator.data
     )
 
 
 class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     _attr_has_entity_name = True
     _attr_should_poll = False
+    _attr_name = "Occupancy"
+    _attr_device_class = BinarySensorDeviceClass.OCCUPANCY
 
-    def __init__(self, coordinator, idx) -> None:
-        super().__init__(coordinator, context=idx)
-        self.idx = idx
-        self.data = self.coordinator.data[self.idx]
-        self.update_data()
+    def __init__(self, coordinator, context) -> None:
+        super().__init__(coordinator, context)
+        self.update()
 
-    def update_data(self):
-        self._attr_name = "Occupancy"
-        self._attr_is_on = self.data["occupied"]
-        self._attr_unique_id = self.data["id"]
-        self._attr_device_class = BinarySensorDeviceClass.OCCUPANCY
-        self._attr_extra_state_attributes = {"next_booking": None}
+    def update(self):
+        data = self.coordinator.data[self.coordinator_context]
+
+        self._attr_is_on = data["occupied"]
+        self._attr_unique_id = data["id"]
+        self._attr_extra_state_attributes = {
+            "current_booking_end": data['current_booking_end'],
+            "next_booking_start": data['next_booking_start'],
+        }
+        if data['name'] == 'Jakuzzi':
+            _LOGGER.debug(data)
         # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
-        if self.data["type"] == 'Desk':
+        if data["type"] == 'Desk':
             self._attr_icon = "mdi:desk"
-        if self.data["type"] == 'Parking_Space':
+        if data["type"] == 'Parking_Space':
             self._attr_icon = "mdi:parking"
-        if self.data["type"] == 'Meeting_Room':
+        if data["type"] == 'Meeting_Room':
             self._attr_icon = "mdi:door"
 
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        if self.idx not in self.coordinator.data:
+        if self.coordinator_context not in self.coordinator.data:
+            _LOGGER.error('Not found')
             return
 
-        self.data = self.coordinator.data[self.idx]
-        self.update_data()
-
-        _LOGGER.debug(self.idx)
-
+        self.update()
         self.async_write_ha_state()
 
     @property
     def device_info(self) -> DeviceInfo:
         """Return the device info."""
+        data = self.coordinator.data[self.coordinator_context]
         return DeviceInfo(
-            identifiers={(DOMAIN, self.data["id"])},
-            suggested_area=self.data["location_name"],
-            name=self.data["location_name"] + " " + self.data["name"],
+            identifiers={(DOMAIN, data["id"])},
+            suggested_area=data["location_name"],
+            name=data["location_name"] + " " + data["name"],
             manufacturer="Flexopus",
-            model=self.data["type"],
+            model=data["type"],
             sw_version="1.0.0",
         )

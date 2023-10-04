@@ -19,11 +19,10 @@ class DataCoordinator(DataUpdateCoordinator):
         self.location_ids = location_ids
 
     async def _async_update_data(self):
-        bookables = []
-        _LOGGER.debug(list(self.async_contexts()))
+        bookables = {}
         for location_id in self.location_ids:
             data = await self.api.fetch_location(location_id)
             for elem in data["data"]:
-                bookables.append(elem)
+                bookables[elem['id']] = elem
 
         return bookables
