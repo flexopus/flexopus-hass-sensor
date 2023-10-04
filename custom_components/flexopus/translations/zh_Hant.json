@@ -1,1 +1,28 @@
-{}
+{
+    "config": {
+        "error": {
+            "auth": "提供的验证令牌无效。"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "整合条目名称",
+                    "access_token": "Flexopus 访问令牌",
+                    "tenant_url": "Flexopus 租户 URL"
+                },
+                "description": "设置 Flexopus 集成",
+                "title": "驗證"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "获取位置"
+                },
+                "description": "配置您的 Flexopus 集成"
+            }
+        }
+    }
+}
