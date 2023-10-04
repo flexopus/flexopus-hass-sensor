@@ -9,7 +9,7 @@
                 "data": {
                     "entry_title": "Az integrációs bejegyzés neve",
                     "access_token": "Flexopus Access Token",
-                    "tenant_url": "Flexopus bérlő URL címe"
+                    "tenant_url": "Flexopus tenant URL"
                 },
                 "description": "A Flexopus integráció beállítása"
             }
