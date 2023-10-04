@@ -15,17 +15,16 @@ from homeassistant.config_entries import ConfigFlow
 from homeassistant.const import CONF_ACCESS_TOKEN
 from homeassistant.data_entry_flow import FlowResult
 import homeassistant.helpers.config_validation as cv
-from . import CONF_TENANT_URL, OPTION_LOCATIONS
 
 from .api import Api
 from .options_flow import FlexopusOptionsFlow
-from .const import DOMAIN
+from .const import DOMAIN, CONF_TENANT_URL, CONF_ENTRY_TITLE
 
-# TODO remove defaults
 AUTH_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_ACCESS_TOKEN, default='27|ieLdgZRVimqD8dmTO1f4FKe0ZKb0umqC1Bn0UUgr'): cv.string,
-        vol.Required(CONF_TENANT_URL, default='http://test.flexopus.xyz'): cv.string,
+        vol.Optional(CONF_ENTRY_TITLE, default='Flexopus'): cv.string,
+        vol.Required(CONF_ACCESS_TOKEN): cv.string,
+        vol.Required(CONF_TENANT_URL): cv.string,
     }
 )
 
@@ -38,8 +37,6 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        # if self._async_current_entries():
-        #    return self.async_abort(reason="single_instance_allowed")
 
         errors: dict[str, str] = {}
         if user_input is not None:
@@ -48,9 +45,13 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
                 await api.fetch_buildings()
             except ClientResponseError:
                 errors["base"] = "auth"
+            except Exception as e:
+                # TODO Catch this nicely
+                errors["base"] = str(e)
+                _LOGGER.error(e)
             if not errors:
                 return self.async_create_entry(
-                    title=DOMAIN,
+                    title=user_input.get(CONF_ENTRY_TITLE, 'Flexopus'),
                     data=user_input,
                 )
 

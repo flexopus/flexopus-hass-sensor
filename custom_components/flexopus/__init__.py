@@ -6,23 +6,13 @@ import voluptuous as vol
 
 from homeassistant import core, config_entries
 import homeassistant.helpers.config_validation as cv
-from homeassistant.const import (
-    CONF_ACCESS_TOKEN,
-    CONF_PATH,
-    Platform,
-)
-from .const import DOMAIN
+
+from .const import DOMAIN, CONF_TENANT_URL, CONF_ACCESS_TOKEN, OPTION_LOCATIONS, PLATFORMS
 
 from .api import Api
 from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
-
-CONF_TENANT_URL = "url"
-CONF_SECURE = "secure"
-OPTION_LOCATIONS = "locations"
-BUILDING_SCHEMA = vol.Schema({vol.Required(CONF_PATH): cv.string})
-PLATFORMS = [Platform.SENSOR]
 
 
 async def async_setup_entry(
@@ -30,7 +20,7 @@ async def async_setup_entry(
 ) -> bool:
     """Set up platform from a ConfigEntry."""
     hass.data.setdefault(DOMAIN, {})
-    _LOGGER.warning(entry.as_dict())
+    _LOGGER.debug(entry.as_dict())
 
     flexopus_api = Api(
         entry.data[CONF_TENANT_URL],

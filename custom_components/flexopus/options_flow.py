@@ -1,12 +1,13 @@
 import logging
 from typing import Any
+
+from .const import CONF_ACCESS_TOKEN, CONF_TENANT_URL
+from .api import Api
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import FlowResult
 import voluptuous as vol
-from . import OPTION_LOCATIONS, DOMAIN
+from . import OPTION_LOCATIONS
 import homeassistant.helpers.config_validation as cv
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class FlexopusOptionsFlow(config_entries.OptionsFlow):
@@ -19,7 +20,6 @@ class FlexopusOptionsFlow(config_entries.OptionsFlow):
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Manage the options."""
-        _LOGGER.debug(self.config_entry.as_dict())
         if user_input is not None:
             return self.async_create_entry(
                 data={
@@ -27,14 +27,17 @@ class FlexopusOptionsFlow(config_entries.OptionsFlow):
                 },
             )
 
-        selected_locations = self.config_entry.options[OPTION_LOCATIONS] if OPTION_LOCATIONS in self.config_entry.options else []
+        api = Api(self.config_entry.data[CONF_TENANT_URL], self.config_entry.data[CONF_ACCESS_TOKEN])
+        available_locations = await api.get_locations()
+        selected_locations = self.config_entry.options[OPTION_LOCATIONS] if OPTION_LOCATIONS in self.config_entry.options else [10]
+        selected_locations = [str(id) for id in selected_locations if str(id) in available_locations]
 
         return self.async_show_form(
             step_id='init',
             data_schema=vol.Schema(
                 {
                     vol.Optional(OPTION_LOCATIONS, default=selected_locations): cv.multi_select(
-                        [1,2,3,4,5]
+                        available_locations
                     ),
                 }
             ),

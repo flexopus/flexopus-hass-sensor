@@ -46,8 +46,6 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
         if self.coordinator_context not in self.coordinator.data:
             _LOGGER.error('Not found')
             return
-        if self.data['name'] == 'Jakuzzi':
-            pass # _LOGGER.debug(self.data)
         self.async_write_ha_state()
 
     @property
