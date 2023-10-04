@@ -1,1 +1,28 @@
-{}
+{
+    "config": {
+        "error": {
+            "auth": "A megadott auth token nem érvényes."
+        },
+        "step": {
+            "user": {
+                "title": "Hitelesítés",
+                "data": {
+                    "entry_title": "Az integrációs bejegyzés neve",
+                    "access_token": "Flexopus Access Token",
+                    "tenant_url": "Flexopus bérlő URL címe"
+                },
+                "description": "A Flexopus integráció beállítása"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Helyszínek lekérése"
+                },
+                "description": "A Flexopus integráció konfigurálása"
+            }
+        }
+    }
+}
