@@ -1,1 +1,28 @@
-{}
+{
+    "config": {
+        "error": {
+            "auth": "Das angegebene Authentifizierungstoken ist ungültig."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "Name des Integrationseintrags",
+                    "access_token": "Flexopus Zugangstoken",
+                    "tenant_url": "Flexopus-Mieter-URL"
+                },
+                "title": "Authentifizierung",
+                "description": "Richten Sie Ihre Flexopus-Integration ein"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "description": "Konfigurieren Sie Ihre Flexopus-Integration",
+                "data": {
+                    "locations": "Standorte abrufen"
+                }
+            }
+        }
+    }
+}
