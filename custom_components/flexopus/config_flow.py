@@ -1,0 +1,71 @@
+"""Config flow to configure the Moon integration."""
+from __future__ import annotations
+
+from typing import Any
+import voluptuous as vol
+from aiohttp import ClientResponseError
+
+import logging
+from homeassistant import config_entries
+from homeassistant.core import callback
+
+from homeassistant.helpers import selector
+
+from homeassistant.config_entries import ConfigFlow
+from homeassistant.const import CONF_ACCESS_TOKEN
+from homeassistant.data_entry_flow import FlowResult
+import homeassistant.helpers.config_validation as cv
+
+from .api import Api
+from .options_flow import FlexopusOptionsFlow
+from .const import DOMAIN, CONF_TENANT_URL, CONF_ENTRY_TITLE
+
+AUTH_SCHEMA = vol.Schema(
+    {
+        vol.Optional(CONF_ENTRY_TITLE, default='Flexopus'): cv.string,
+        vol.Required(CONF_ACCESS_TOKEN): cv.string,
+        vol.Required(CONF_TENANT_URL): cv.string,
+    }
+)
+
+_LOGGER = logging.getLogger(__name__)
+
+
+class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+
+        errors: dict[str, str] = {}
+        if user_input is not None:
+            api = Api(user_input[CONF_TENANT_URL], user_input[CONF_ACCESS_TOKEN])
+            try:
+                await api.fetch_buildings()
+            except ClientResponseError:
+                errors["base"] = "auth"
+            except Exception as e:
+                # TODO Catch this nicely
+                errors["base"] = str(e)
+                _LOGGER.error(e)
+            if not errors:
+                return self.async_create_entry(
+                    title=user_input.get(CONF_ENTRY_TITLE, 'Flexopus'),
+                    data=user_input,
+                )
+
+        return self.async_show_form(
+            step_id="user", data_schema=AUTH_SCHEMA, errors=errors
+        )
+
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        config_entry: config_entries.ConfigEntry,
+    ) -> config_entries.OptionsFlow:
+        """Create the options flow."""
+        return FlexopusOptionsFlow(config_entry)
+
+

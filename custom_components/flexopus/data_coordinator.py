@@ -1,3 +1,4 @@
+from homeassistant.core import HomeAssistant
 from .api import Api
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 import logging
@@ -7,23 +8,23 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class DataCoordinator(DataUpdateCoordinator):
-    bookables: dict[str, object] = {}
-
-    def __init__(self, hass, api: Api, location_ids) -> None:
+    def __init__(self, hass: HomeAssistant, api: Api, location_ids) -> None:
         super().__init__(
             hass,
             _LOGGER,
             name=DOMAIN,
             update_interval=SCAN_INTERVAL,
-            update_method=self.update_method
         )
         self.api = api
         self.location_ids = location_ids
 
-    async def update_method(self):
-        for idx, ent in enumerate(self.location_ids):
-            data = await self.api.fetch_location(ent)
-            for elem in data['data']:
-                self.bookables[elem['id']] = elem
+    async def _async_update_data(self):
+        bookables = {}
+        for location_id in self.location_ids:
+            data = await self.api.fetch_location(location_id)
+            for elem in data["data"]:
+                bookables[elem['id']] = elem
+        return bookables
 
-        return self.bookables
+    def update(self, location_ids):
+        self.location_ids = location_ids
