@@ -36,28 +36,9 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     _attr_name = "Occupancy"
     _attr_device_class = BinarySensorDeviceClass.OCCUPANCY
 
-    def __init__(self, coordinator, context) -> None:
-        super().__init__(coordinator, context)
-        self.update()
-
-    def update(self):
-        data = self.coordinator.data[self.coordinator_context]
-
-        self._attr_is_on = data["occupied"]
-        self._attr_unique_id = data["id"]
-        self._attr_extra_state_attributes = {
-            "current_booking_end": data['current_booking_end'],
-            "next_booking_start": data['next_booking_start'],
-        }
-        if data['name'] == 'Jakuzzi':
-            _LOGGER.debug(data)
-        # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
-        if data["type"] == 'Desk':
-            self._attr_icon = "mdi:desk"
-        if data["type"] == 'Parking_Space':
-            self._attr_icon = "mdi:parking"
-        if data["type"] == 'Meeting_Room':
-            self._attr_icon = "mdi:door"
+    data: dict = property(
+        fget=lambda self: self.coordinator.data[self.coordinator_context]
+    )
 
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -65,19 +46,43 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
         if self.coordinator_context not in self.coordinator.data:
             _LOGGER.error('Not found')
             return
-
-        self.update()
+        if self.data['name'] == 'Jakuzzi':
+            pass # _LOGGER.debug(self.data)
         self.async_write_ha_state()
+
+    @property
+    def is_on(self) -> bool:
+        return self.data["occupied"]
+
+    @property
+    def unique_id(self) -> str:
+        return self.data["id"]
+
+    @property
+    def icon(self) -> str:
+        # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
+        if self.data["type"] == 'Desk':
+            return "mdi:desk"
+        if self.data["type"] == 'Parking_Space':
+            return "mdi:parking"
+        if self.data["type"] == 'Meeting_Room':
+            return "mdi:door"
+
+    @property
+    def extra_state_attributes(self) -> str:
+        return {
+            "current_booking_end": self.data['current_booking_end'],
+            "next_booking_start": self.data['next_booking_start'],
+        }
 
     @property
     def device_info(self) -> DeviceInfo:
         """Return the device info."""
-        data = self.coordinator.data[self.coordinator_context]
         return DeviceInfo(
-            identifiers={(DOMAIN, data["id"])},
-            suggested_area=data["location_name"],
-            name=data["location_name"] + " " + data["name"],
+            identifiers={(DOMAIN, self.data["id"])},
+            suggested_area=self.data["location_name"],
+            name=self.data["location_name"] + " " + self.data["name"],
             manufacturer="Flexopus",
-            model=data["type"],
+            model=self.data["type"],
             sw_version="1.0.0",
         )

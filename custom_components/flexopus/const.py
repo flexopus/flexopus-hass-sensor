@@ -1,4 +1,4 @@
 from datetime import timedelta
 
 DOMAIN = "flexopus"
-SCAN_INTERVAL = timedelta(seconds=15)
+SCAN_INTERVAL = timedelta(seconds=60)

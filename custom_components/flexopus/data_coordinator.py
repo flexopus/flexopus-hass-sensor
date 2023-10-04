@@ -24,5 +24,7 @@ class DataCoordinator(DataUpdateCoordinator):
             data = await self.api.fetch_location(location_id)
             for elem in data["data"]:
                 bookables[elem['id']] = elem
-
         return bookables
+
+    def update(self, location_ids):
+        self.location_ids = location_ids

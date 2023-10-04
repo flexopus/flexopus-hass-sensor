@@ -37,6 +37,14 @@ class Api:
                 response.raise_for_status()
                 return await response.json()
 
+    async def get_locations(self):
+        buildings = await self.fetch_buildings()
+        return {
+            l['id']: b['name'] + ' - ' + l['name']
+                for b in buildings['data']
+                    for l in b['locations']
+        }
+
     def normalize_url(self, tenant_url):
         tenant_url = tenant_url.strip()
         parsed_url = urlparse(tenant_url)
