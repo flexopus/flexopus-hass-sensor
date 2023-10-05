@@ -4,12 +4,12 @@ import logging
 
 import voluptuous as vol
 
-from homeassistant import core, config_entries
 import homeassistant.helpers.config_validation as cv
-
-from .const import DOMAIN, CONF_TENANT_URL, CONF_ACCESS_TOKEN, OPTION_LOCATIONS, PLATFORMS
+from homeassistant import config_entries, core
 
 from .api import Api
+from .const import (CONF_ACCESS_TOKEN, CONF_TENANT_URL, DOMAIN,
+                    OPTION_LOCATIONS, PLATFORMS)
 from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)

@@ -1,13 +1,15 @@
 import logging
 from typing import Any
 
-from .const import CONF_ACCESS_TOKEN, CONF_TENANT_URL
-from .api import Api
+import voluptuous as vol
+
+import homeassistant.helpers.config_validation as cv
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import FlowResult
-import voluptuous as vol
+
 from . import OPTION_LOCATIONS
-import homeassistant.helpers.config_validation as cv
+from .api import Api
+from .const import CONF_ACCESS_TOKEN, CONF_TENANT_URL
 
 
 class FlexopusOptionsFlow(config_entries.OptionsFlow):
