@@ -8,7 +8,7 @@
                 "data": {
                     "entry_title": "Name des Integrationseintrags",
                     "access_token": "Flexopus Zugangstoken",
-                    "tenant_url": "Flexopus-Mieter-URL"
+                    "tenant_url": "Flexopus-Mandanten-URL"
                 },
                 "title": "Authentifizierung",
                 "description": "Richten Sie Ihre Flexopus-Integration ein"
