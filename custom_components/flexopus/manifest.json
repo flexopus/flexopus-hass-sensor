@@ -5,6 +5,7 @@
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/flexopus/flexopus-hass-sensor",
+  "issue_tracker": "https://github.com/flexopus/flexopus-hass-sensor/issues",
   "domain": "flexopus",
   "iot_class": "cloud_poll",
   "name": "Flexopus",
