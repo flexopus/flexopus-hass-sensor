@@ -5,7 +5,7 @@ import logging
 from typing import Any
 
 import voluptuous as vol
-from aiohttp import ClientResponseError
+from aiohttp import ClientResponseError, InvalidURL, ClientConnectorError
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant import config_entries
@@ -13,7 +13,6 @@ from homeassistant.config_entries import ConfigFlow
 from homeassistant.const import CONF_ACCESS_TOKEN
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
-from homeassistant.helpers import selector
 
 from .api import Api
 from .const import CONF_ENTRY_TITLE, CONF_TENANT_URL, DOMAIN
@@ -44,10 +43,10 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
                 await api.fetch_buildings()
             except ClientResponseError:
                 errors["base"] = "auth"
-            except Exception as e:
-                # TODO Catch this nicely
-                errors["base"] = str(e)
-                _LOGGER.error(e)
+            except InvalidURL:
+                errors["base"] = "invalid_url"
+            except ClientConnectorError:
+                errors["base"] = "cannot_connect"
             if not errors:
                 return self.async_create_entry(
                     title=user_input.get(CONF_ENTRY_TITLE, 'Flexopus'),
