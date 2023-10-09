@@ -7,7 +7,7 @@
   "documentation": "https://github.com/flexopus/flexopus-hass-sensor",
   "issue_tracker": "https://github.com/flexopus/flexopus-hass-sensor/issues",
   "domain": "flexopus",
-  "iot_class": "cloud_poll",
+  "iot_class": "cloud_polling",
   "name": "Flexopus",
   "requirements": [],
   "version": "1.0.0"
