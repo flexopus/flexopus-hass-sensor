@@ -3,9 +3,11 @@
 import logging
 
 import voluptuous as vol
+from homeassistant.helpers import discovery
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant import config_entries, core
+from homeassistant.helpers.typing import ConfigType
 
 from .api import Api
 from .const import (
@@ -19,6 +21,41 @@ from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_TENANT_URL): cv.string,
+                vol.Required(CONF_ACCESS_TOKEN): cv.string,
+                vol.Optional(OPTION_LOCATIONS, default=[]): vol.All(
+                    cv.ensure_list, [int]
+                ),
+            }
+        )
+    },
+    extra=vol.ALLOW_EXTRA,
+)
+
+
+async def async_setup(hass: core.HomeAssistant, config: ConfigType) -> bool:
+    """Activate the Flexopus integration."""
+    conf = config[DOMAIN]
+    _LOGGER.debug(conf)
+    flexopus_api = Api(
+        conf[CONF_TENANT_URL],
+        conf[CONF_ACCESS_TOKEN],
+    )
+    locations = conf.get(OPTION_LOCATIONS, [])
+    coordinator = hass.data[DOMAIN] = DataCoordinator(hass, flexopus_api, locations)
+
+    await coordinator.async_config_entry_first_refresh()
+
+    hass.async_create_task(
+        discovery.async_load_platform(hass, PLATFORMS[0], DOMAIN, None, config)
+    )
+
+    return True
+
 
 async def async_setup_entry(
     hass: core.HomeAssistant, entry: config_entries.ConfigEntry
@@ -31,9 +68,7 @@ async def async_setup_entry(
         entry.data[CONF_TENANT_URL],
         entry.data[CONF_ACCESS_TOKEN],
     )
-    locations = []
-    if OPTION_LOCATIONS in entry.options:
-        locations = entry.options[OPTION_LOCATIONS]
+    locations = entry.options.get(OPTION_LOCATIONS, [])
     coordinator = DataCoordinator(hass, flexopus_api, locations)
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_config_entry_first_refresh()
@@ -43,7 +78,7 @@ async def async_setup_entry(
 
     # Forward the setup to the sensor platform.
     hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, "sensor")
+        hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     )
     return True
 

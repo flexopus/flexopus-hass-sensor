@@ -17,6 +17,14 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 
+async def async_setup(
+    hass: HomeAssistant,
+    async_add_entities,
+):
+    coordinator = hass.data[DOMAIN]
+    async_add_entities(FlexopusSensor(coordinator, key) for key in coordinator.data)
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: config_entries.ConfigEntry,
