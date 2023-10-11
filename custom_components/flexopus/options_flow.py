@@ -34,21 +34,26 @@ class FlexopusOptionsFlow(config_entries.OptionsFlow):
             )
         try:
             errors = dict[str, str]()
-            api = Api(self.config_entry.data[CONF_TENANT_URL], self.config_entry.data[CONF_ACCESS_TOKEN])
+            api = Api(
+                self.config_entry.data[CONF_TENANT_URL],
+                self.config_entry.data[CONF_ACCESS_TOKEN],
+            )
             available_locations = await api.get_locations()
             selected_locations = self.config_entry.options.get(OPTION_LOCATIONS, [10])
             previous_count = len(selected_locations)
-            selected_locations = [str(id) for id in selected_locations if str(id) in available_locations]
+            selected_locations = [
+                str(id) for id in selected_locations if str(id) in available_locations
+            ]
             if len(selected_locations) < previous_count:
                 errors["base"] = "invalid_location"
             return self.async_show_form(
-                step_id='init',
+                step_id="init",
                 errors=errors,
                 data_schema=vol.Schema(
                     {
-                        vol.Optional(OPTION_LOCATIONS, default=selected_locations): cv.multi_select(
-                            available_locations
-                        ),
+                        vol.Optional(
+                            OPTION_LOCATIONS, default=selected_locations
+                        ): cv.multi_select(available_locations),
                     }
                 ),
             )
@@ -58,6 +63,6 @@ class FlexopusOptionsFlow(config_entries.OptionsFlow):
         except ClientConnectorError as e:
             _LOGGER.error(e)
             return self.async_abort(reason="cannot_connect")
-        except Exception as e: # pylance Broad
+        except Exception as e:  # pylance Broad
             _LOGGER.error(e)
             return self.async_abort(reason="unknown")

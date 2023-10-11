@@ -40,9 +40,9 @@ class Api:
     async def get_locations(self):
         buildings = await self.fetch_buildings()
         return {
-            str(l['id']): b['name'] + ' - ' + l['name']
-                for b in buildings['data']
-                    for l in b['locations']
+            str(l["id"]): b["name"] + " - " + l["name"]
+            for b in buildings["data"]
+            for l in b["locations"]
         }
 
     def normalize_url(self, tenant_url):

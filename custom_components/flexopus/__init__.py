@@ -8,8 +8,13 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant import config_entries, core
 
 from .api import Api
-from .const import (CONF_ACCESS_TOKEN, CONF_TENANT_URL, DOMAIN,
-                    OPTION_LOCATIONS, PLATFORMS)
+from .const import (
+    CONF_ACCESS_TOKEN,
+    CONF_TENANT_URL,
+    DOMAIN,
+    OPTION_LOCATIONS,
+    PLATFORMS,
+)
 from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
@@ -42,7 +47,10 @@ async def async_setup_entry(
     )
     return True
 
-async def async_unload_entry(hass: core.HomeAssistant, entry: config_entries.ConfigEntry) -> bool:
+
+async def async_unload_entry(
+    hass: core.HomeAssistant, entry: config_entries.ConfigEntry
+) -> bool:
     """Handle removal of an entry."""
     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         del hass.data[DOMAIN]

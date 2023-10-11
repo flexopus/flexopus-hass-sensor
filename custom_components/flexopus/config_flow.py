@@ -20,7 +20,7 @@ from .options_flow import FlexopusOptionsFlow
 
 AUTH_SCHEMA = vol.Schema(
     {
-        vol.Optional(CONF_ENTRY_TITLE, default='Flexopus'): cv.string,
+        vol.Optional(CONF_ENTRY_TITLE, default="Flexopus"): cv.string,
         vol.Required(CONF_ACCESS_TOKEN): cv.string,
         vol.Required(CONF_TENANT_URL): cv.string,
     }
@@ -35,7 +35,6 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-
         errors: dict[str, str] = {}
         if user_input is not None:
             api = Api(user_input[CONF_TENANT_URL], user_input[CONF_ACCESS_TOKEN])
@@ -49,14 +48,13 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
                 errors["base"] = "cannot_connect"
             if not errors:
                 return self.async_create_entry(
-                    title=user_input.get(CONF_ENTRY_TITLE, 'Flexopus'),
+                    title=user_input.get(CONF_ENTRY_TITLE, "Flexopus"),
                     data=user_input,
                 )
 
         return self.async_show_form(
             step_id="user", data_schema=AUTH_SCHEMA, errors=errors
         )
-
 
     @staticmethod
     @callback
@@ -65,5 +63,3 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> config_entries.OptionsFlow:
         """Create the options flow."""
         return FlexopusOptionsFlow(config_entry)
-
-
