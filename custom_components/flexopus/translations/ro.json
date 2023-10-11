@@ -1,1 +1,28 @@
-{}
+{
+    "config": {
+        "error": {
+            "auth": "Tokenul de autentificare furnizat nu este valid."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "Denumirea intrării de integrare",
+                    "access_token": "Token de acces Flexopus",
+                    "tenant_url": "URL-ul chiriașului Flexopus"
+                },
+                "description": "Configurați integrarea Flexopus",
+                "title": "Autentificare"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Obțineți locații"
+                },
+                "description": "Configurați integrarea Flexopus"
+            }
+        }
+    }
+}
