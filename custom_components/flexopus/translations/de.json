@@ -1,7 +1,9 @@
 {
     "config": {
         "error": {
-            "auth": "Das angegebene Authentifizierungstoken ist ungültig."
+            "auth": "Das angegebene Auth-Token ist nicht gültig.",
+            "invalid_url": "Die angegebene Url ist nicht gültig.",
+            "cannot_connect": "Die Verbindung zur angegebenen URL konnte nicht hergestellt werden."
         },
         "step": {
             "user": {
@@ -23,6 +25,14 @@
                     "locations": "Standorte abrufen"
                 }
             }
+        },
+        "abort": {
+            "invalid_auth": "Ungültige Athentifizierung. Wenn sich Ihre Tenat-URL oder Ihr API-Token geändert hat, konfigurieren Sie bitte die Integration neu",
+            "cannot_connect": "Flexopus ist nicht erreichbar. Überprüfen Sie die Netzwerkkonfiguration.",
+            "unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte prüfen Sie die Protokolle."
+        },
+        "error": {
+            "invalid_location": "Einige der zuvor konfigurierten Standorte sind nicht mehr verfügbar. Wenn Sie eine neue Konfiguration anwenden, werden sie im Home Assistant nicht mehr angezeigt."
         }
     }
 }
