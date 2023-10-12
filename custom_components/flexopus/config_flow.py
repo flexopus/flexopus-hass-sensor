@@ -5,16 +5,15 @@ import logging
 from typing import Any
 
 import voluptuous as vol
-from aiohttp import ClientResponseError, InvalidURL, ClientConnectorError
+from aiohttp import ClientConnectorError, ClientResponseError, InvalidURL
+from flexopus import FlexopusApi
 
 import homeassistant.helpers.config_validation as cv
-from homeassistant import config_entries
-from homeassistant.config_entries import ConfigFlow
+from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
 from homeassistant.const import CONF_ACCESS_TOKEN
 from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 
-from .api import Api
 from .const import CONF_ENTRY_TITLE, CONF_TENANT_URL, DOMAIN
 from .options_flow import FlexopusOptionsFlow
 
@@ -37,7 +36,9 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> FlowResult:
         errors: dict[str, str] = {}
         if user_input is not None:
-            api = Api(user_input[CONF_TENANT_URL], user_input[CONF_ACCESS_TOKEN])
+            api = FlexopusApi(
+                user_input[CONF_TENANT_URL], user_input[CONF_ACCESS_TOKEN]
+            )
             try:
                 await api.fetch_buildings()
             except ClientResponseError:
@@ -59,7 +60,7 @@ class FlexopusConfigFlow(ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(
-        config_entry: config_entries.ConfigEntry,
-    ) -> config_entries.OptionsFlow:
+        config_entry: ConfigEntry,
+    ) -> OptionsFlow:
         """Create the options flow."""
         return FlexopusOptionsFlow(config_entry)

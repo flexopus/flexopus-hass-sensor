@@ -1,16 +1,17 @@
 import logging
 
+from flexopus import FlexopusApi
+
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .api import Api
 from .const import DOMAIN, SCAN_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
 
 class DataCoordinator(DataUpdateCoordinator):
-    def __init__(self, hass: HomeAssistant, api: Api, location_ids) -> None:
+    def __init__(self, hass: HomeAssistant, api: FlexopusApi, location_ids) -> None:
         super().__init__(
             hass,
             _LOGGER,
@@ -28,5 +29,5 @@ class DataCoordinator(DataUpdateCoordinator):
                 bookables[elem["id"]] = elem
         return bookables
 
-    def update(self, location_ids):
+    def update(self, location_ids) -> None:
         self.location_ids = location_ids

@@ -3,11 +3,11 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant import config_entries
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntity,
 )
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -19,7 +19,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    config_entry: config_entries.ConfigEntry,
+    config_entry: ConfigEntry,
     async_add_entities,
 ):
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
@@ -63,7 +63,7 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
             return "mdi:door"
 
     @property
-    def extra_state_attributes(self) -> str:
+    def extra_state_attributes(self) -> dict:
         return {
             "current_booking_end": self.data["current_booking_end"],
             "next_booking_start": self.data["next_booking_start"],
