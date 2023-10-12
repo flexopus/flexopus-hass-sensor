@@ -1,0 +1,38 @@
+{
+    "config": {
+        "error": {
+            "auth": "A megadott auth token nem érvényes.",
+            "invalid_url": "A megadott url nem érvényes.",
+            "cannot_connect": "Nem sikerült csatlakozni a megadott url-hez."
+        },
+        "step": {
+            "user": {
+                "title": "Hitelesítés",
+                "data": {
+                    "entry_title": "Az integrációs bejegyzés neve",
+                    "access_token": "Flexopus hozzáférési token",
+                    "tenant_url": "Flexopus tenant URL"
+                },
+                "description": "A Flexopus integráció beállítása"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Helyszínek lekérése"
+                },
+                "description": "A Flexopus integráció konfigurálása"
+            }
+        },
+        "abort": {
+            "invalid_auth": "Érvénytelen bejelentkezés. Ha a tenat URL vagy az API token megváltozott, kérjük, konfigurálja újra az integrációt.",
+            "cannot_connect": "A Flexopus nem elérhető. Ellenőrizze a hálózati konfigurációt.",
+            "unknown": "Ismeretlen hiba történt. Kérjük, ellenőrizze a naplókat."
+        },
+        "error": {
+            "invalid_location": "A korábban konfigurált helyek közül néhány nem elérhető. Az új konfiguráció alkalmazásával ezek már nem jelennek meg az Otthoni asszisztensben."
+        }
+    }
+}

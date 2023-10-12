@@ -1,7 +1,9 @@
 {
   "config": {
     "error": {
-      "auth": "The auth token provided is not valid."
+      "auth": "The provided auth token is not valid.",
+      "invalid_url": "The provided url is not valid.",
+      "cannot_connect": "Failed to connect to the given url."
     },
     "step": {
       "user": {
@@ -16,6 +18,14 @@
     }
   },
   "options": {
+    "abort": {
+      "invalid_auth": "Invalid athentication. If your tenat URL or API token has changed, please reconfigure the integration",
+      "cannot_connect": "Flexopus is not reachable. Check the network configuration.",
+      "unknown": "An unknown error happened. Please check the logs."
+    },
+    "error": {
+      "invalid_location": "Some of the previously configured locations are not available. By applying a new configuration, they will no longer show up in Home Assistant."
+    },
     "step": {
       "init": {
         "data": {

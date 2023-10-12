@@ -1,0 +1,38 @@
+{
+    "config": {
+        "error": {
+            "auth": "Tokenul de autentificare furnizat nu este valid.",
+            "invalid_url": "Adresa URL furnizată nu este validă.",
+            "cannot_connect": "Nu a reușit să se conecteze la adresa URL dată."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "Denumirea intrării de integrare",
+                    "access_token": "Token de acces Flexopus",
+                    "tenant_url": "URL-ul chiriașului Flexopus"
+                },
+                "description": "Configurați integrarea Flexopus",
+                "title": "Autentificare"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Obțineți locații"
+                },
+                "description": "Configurați integrarea Flexopus"
+            }
+        },
+        "abort": {
+            "invalid_auth": "Autentificare invalidă. În cazul în care URL-ul tenat sau token-ul API s-a schimbat, vă rugăm să reconfigurați integrarea",
+            "cannot_connect": "Flexopus nu este accesibil. Verificați configurația rețelei.",
+            "unknown": "S-a produs o eroare necunoscută. Vă rugăm să verificați jurnalele."
+        },
+        "error": {
+            "invalid_location": "Unele dintre locațiile configurate anterior nu sunt disponibile. Prin aplicarea unei noi configurații, acestea nu vor mai apărea în Home Assistant."
+        }
+    }
+}

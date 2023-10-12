@@ -3,17 +3,15 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant import config_entries
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntity,
 )
-from homeassistant.core import callback
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-)
-from homeassistant.core import HomeAssistant
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,13 +19,11 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    config_entry: config_entries.ConfigEntry,
+    config_entry: ConfigEntry,
     async_add_entities,
 ):
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
-    async_add_entities(
-        FlexopusSensor(coordinator, key) for key in coordinator.data
-    )
+    async_add_entities(FlexopusSensor(coordinator, key) for key in coordinator.data)
 
 
 class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
@@ -44,7 +40,7 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
         if self.coordinator_context not in self.coordinator.data:
-            _LOGGER.error('Not found')
+            _LOGGER.error("Not found")
             return
         self.async_write_ha_state()
 
@@ -59,18 +55,18 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     @property
     def icon(self) -> str:
         # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
-        if self.data["type"] == 'Desk':
+        if self.data["type"] == "Desk":
             return "mdi:desk"
-        if self.data["type"] == 'Parking_Space':
+        if self.data["type"] == "Parking_Space":
             return "mdi:parking"
-        if self.data["type"] == 'Meeting_Room':
+        if self.data["type"] == "Meeting_Room":
             return "mdi:door"
 
     @property
-    def extra_state_attributes(self) -> str:
+    def extra_state_attributes(self) -> dict:
         return {
-            "current_booking_end": self.data['current_booking_end'],
-            "next_booking_start": self.data['next_booking_start'],
+            "current_booking_end": self.data["current_booking_end"],
+            "next_booking_start": self.data["next_booking_start"],
         }
 
     @property

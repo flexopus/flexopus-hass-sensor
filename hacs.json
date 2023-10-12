@@ -1,5 +1,4 @@
 {
-  "name": "Flexopus Occupancy Sensor",
-  "render_readme": true,
-  "iot_class": "cloud_polling"
+  "name": "Flexopus",
+  "render_readme": true
 }
