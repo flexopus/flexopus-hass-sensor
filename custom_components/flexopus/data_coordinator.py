@@ -20,11 +20,12 @@ class DataCoordinator(DataUpdateCoordinator):
         )
         self.api = api
         self.location_ids = location_ids
+        self.timezone = str(hass.config.time_zone)  # TODO adapt api to handle timezone
 
     async def _async_update_data(self):
         bookables = {}
         for location_id in self.location_ids:
-            data = await self.api.fetch_location(location_id)
+            data = await self.api.fetch_location(location_id, details=True)
             for elem in data["data"]:
                 bookables[elem["id"]] = elem
         return bookables

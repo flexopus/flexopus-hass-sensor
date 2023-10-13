@@ -7,13 +7,8 @@ from flexopus import FlexopusApi
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .const import (
-    CONF_ACCESS_TOKEN,
-    CONF_TENANT_URL,
-    DOMAIN,
-    OPTION_LOCATIONS,
-    PLATFORMS,
-)
+from .const import (CONF_ACCESS_TOKEN, CONF_TENANT_URL, DOMAIN,
+                    OPTION_LOCATIONS, PLATFORMS)
 from .data_coordinator import DataCoordinator
 
 _LOGGER = logging.getLogger(__name__)
