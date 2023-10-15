@@ -27,12 +27,12 @@
             }
         },
         "abort": {
-            "invalid_auth": "Érvénytelen bejelentkezés. Ha a tenat URL vagy az API token megváltozott, kérjük, konfigurálja újra az integrációt.",
-            "cannot_connect": "A Flexopus nem elérhető. Ellenőrizze a hálózati konfigurációt.",
-            "unknown": "Ismeretlen hiba történt. Kérjük, ellenőrizze a naplókat."
+            "invalid_auth": "Érvénytelen hitelesítés. Ha a bérlő URL-je vagy API-tokenje megváltozott, konfiguráld újra az integrációt",
+            "cannot_connect": "A Flexopus nem elérhető. Ellenőrizd a hálózati konfigurációt.",
+            "unknown": "Ismeretlen hiba történt. Kérjük, ellenőrizd a naplókat."
         },
         "error": {
-            "invalid_location": "A korábban konfigurált helyek közül néhány nem elérhető. Az új konfiguráció alkalmazásával ezek már nem jelennek meg az Otthoni asszisztensben."
+            "invalid_location": "A korábban konfigurált helyek közül néhány nem elérhető. Az új konfiguráció alkalmazásával ezek már nem jelennek meg a Home asszisztensben."
         }
     }
 }
