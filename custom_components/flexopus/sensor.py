@@ -12,9 +12,20 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
+from .const import (
+    BOOKABLE_TYPE_DESK,
+    BOOKABLE_TYPE_MEETING_ROOM,
+    BOOKABLE_TYPE_PARKING_SPACE,
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
+
+bookable_type_names = {
+    BOOKABLE_TYPE_DESK: "Desk",
+    BOOKABLE_TYPE_MEETING_ROOM: "Meeting Room",
+    BOOKABLE_TYPE_PARKING_SPACE: "Parking Space",
+}
 
 
 async def async_setup_entry(
@@ -55,18 +66,18 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
     @property
     def icon(self) -> str:
         # mdi:door, mdi:parking, https://pictogrammers.com/library/mdi/
-        if self.data["type"] == "Desk":
+        if self.data["type"] == BOOKABLE_TYPE_DESK:
             return "mdi:desk"
-        if self.data["type"] == "Parking_Space":
+        if self.data["type"] == BOOKABLE_TYPE_PARKING_SPACE:
             return "mdi:parking"
-        if self.data["type"] == "Meeting_Room":
+        if self.data["type"] == BOOKABLE_TYPE_MEETING_ROOM:
             return "mdi:door"
 
     @property
     def extra_state_attributes(self) -> dict:
         return {
-            "current_booking_end": self.data["current_booking_end"],
-            "next_booking_start": self.data["next_booking_start"],
+            "booking_current": self.data.get("booking_current", None),
+            "booking_next": self.data.get("booking_next", None),
         }
 
     @property
@@ -75,8 +86,8 @@ class FlexopusSensor(CoordinatorEntity, BinarySensorEntity):
         return DeviceInfo(
             identifiers={(DOMAIN, self.data["id"])},
             suggested_area=self.data["location_name"],
-            name=self.data["location_name"] + " " + self.data["name"],
+            name=f"{self.data['location_name']} {self.data['name']}",
             manufacturer="Flexopus",
-            model=self.data["type"],
+            model=bookable_type_names.get(self.data["type"], "Unknown Type"),
             sw_version="1.0.0",
         )
