@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "data": {
+                    "tenant_url": "Flexopus kiracı URL'si",
+                    "entry_title": "Entegrasyon girişinin adı",
+                    "access_token": "Flexopus Erişim Belirteci"
+                },
+                "description": "Flexopus entegrasyonunuzu ayarlama",
+                "title": "Kimlik Doğrulama"
+            }
+        },
+        "error": {
+            "auth": "Sağlanan kimlik doğrulama belirteci geçerli değil.",
+            "invalid_url": "Sağlanan url geçerli değil.",
+            "cannot_connect": "Verilen url'ye bağlanılamadı."
+        }
+    },
+    "options": {
+        "abort": {
+            "cannot_connect": "Flexopus'a erişilemiyor. Ağ yapılandırmasını kontrol edin.",
+            "invalid_auth": "Geçersiz kimlik doğrulama. Tenat URL'niz veya API belirteciniz değiştiyse, lütfen entegrasyonu yeniden yapılandırın",
+            "unknown": "Bilinmeyen bir hata oluştu. Lütfen günlükleri kontrol edin."
+        },
+        "error": {
+            "invalid_location": "Önceden yapılandırılmış konumlardan bazıları mevcut değildir. Yeni bir yapılandırma uygulandığında, bunlar artık Home Assistant'ta görünmeyecektir."
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Konumları getir"
+                },
+                "description": "Flexopus entegrasyonunuzu yapılandırın"
+            }
+        }
+    }
+}

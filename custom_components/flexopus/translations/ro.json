@@ -27,7 +27,7 @@
             }
         },
         "abort": {
-            "invalid_auth": "Autentificare invalidă. În cazul în care URL-ul tenat sau token-ul API s-a schimbat, vă rugăm să reconfigurați integrarea",
+            "invalid_auth": "Autentificare invalidă. În cazul în care URL-ul chiriașului sau token-ul API s-a schimbat, vă rugăm să reconfigurați integrarea",
             "cannot_connect": "Flexopus nu este accesibil. Verificați configurația rețelei.",
             "unknown": "S-a produs o eroare necunoscută. Vă rugăm să verificați jurnalele."
         },
