@@ -2,8 +2,8 @@
     "config": {
         "error": {
             "auth": "提供的授权令牌无效。",
-            "invalid_url": "所提供的网址无效。",
-            "cannot_connect": "连接给定的 url 失败。"
+            "invalid_url": "提供的网址无效。",
+            "cannot_connect": "无法连接到给定的 url。"
         },
         "step": {
             "user": {
@@ -27,12 +27,12 @@
             }
         },
         "abort": {
-            "invalid_auth": "验证无效。如果您的 tenat URL 或 API 标记已更改，请重新配置集成",
+            "invalid_auth": "认证无效。如果您的 tenat URL 或 API 令牌已更改，请重新配置集成",
             "cannot_connect": "Flexopus 无法连接。检查网络配置。",
             "unknown": "发生未知错误。请查看日志。"
         },
         "error": {
-            "invalid_location": "某些先前配置的位置不可用。应用新配置后，它们将不再显示在主页助理中。"
+            "invalid_location": "一些先前配置的位置不可用。通过应用新配置，它们将不再显示在 Home Assistant 中。"
         }
     }
 }
