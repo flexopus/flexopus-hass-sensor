@@ -1,13 +1,17 @@
-# Flexopus integration for Home Assistant
+![Flexopus logo](https://brands.home-assistant.io/_/flexopus/dark_logo@2x.png#gh-dark-mode-only)
+![Flexopus logo](https://brands.home-assistant.io/_/flexopus/logo@2x.png#gh-light-mode-only)
+
+# Flexopus Integration
+This integration provides an interface to integrate the Flexopus office management platform for smart office automation purposes.
 
 ## ⚠️ Warning
 You need to have an active [Flexopus](https://flexopus.com) subscription with API functionality in order to use this integration. Contact [support@flexopus.com](mailto:support@flexopus.com) for more information.
 
 ## Installation with HACS (recommended)
-1. Install [HACS](https://hacs.xyz/docs/setup/download/)
+0. Install [HACS](https://hacs.xyz/docs/setup/download/)
 1. Go to `http(s)://<ha-instance>/hacs/integrations`
-1. Click `Custom repositories`
-1. Add `https://github.com/flexopus/flexopus-hass-sensor` as type `Integration`
+1. Click `Custom repositories` and add `https://github.com/flexopus/flexopus-hass-sensor` as type `Integration`
+1. Add Flexopus from the integration list
 1. Restart HA
 
 ## Manual installation
