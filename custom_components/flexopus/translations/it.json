@@ -29,10 +29,10 @@
         "abort": {
             "invalid_auth": "Autenticazione non valida. Se l'URL del tuo tenat o il token API è cambiato, riconfigura l'integrazione",
             "cannot_connect": "Flexopus non è raggiungibile. Controlla la configurazione di rete.",
-            "unknown": "Si è verificato un errore sconosciuto. Si prega di controllare i registri."
+            "unknown": "Si è verificato un errore sconosciuto. Controlla i registri."
         },
         "error": {
-            "invalid_location": "Alcune delle posizioni configurate in precedenza non sono disponibili. Applicando una nuova configurazione, non verranno più visualizzate in Home Assistant."
+            "invalid_location": "Alcune delle posizioni configurate in precedenza non sono disponibili. Applicando una nuova configurazione, non verranno più visualizzati in Home Assistant."
         }
     }
 }
