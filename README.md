@@ -1,5 +1,8 @@
-![Flexopus logo](https://brands.home-assistant.io/_/flexopus/dark_logo@2x.png#gh-dark-mode-only)
-![Flexopus logo](https://brands.home-assistant.io/_/flexopus/logo@2x.png#gh-light-mode-only)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://brands.home-assistant.io/_/flexopus/dark_logo@2x.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://brands.home-assistant.io/_/flexopus/logo@2x.png">
+  <img alt="Flexopus logo" src="https://brands.home-assistant.io/_/flexopus/logo@2x.png">
+</picture>
 
 # Flexopus Integration
 This integration provides an interface to integrate the Flexopus office management platform for smart office automation purposes.
