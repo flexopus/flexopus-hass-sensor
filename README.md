@@ -4,10 +4,9 @@
 You need to have an active [Flexopus](https://flexopus.com) subscription with API functionality in order to use this integration. Contact [support@flexopus.com](mailto:support@flexopus.com) for more information.
 
 ## Installation with HACS (recommended)
-1. Install [HACS](https://hacs.xyz/docs/setup/download/)
+1. Install [HACS](https://hacs.xyz/docs/use/download/download/)
 1. Go to `http(s)://<ha-instance>/hacs/integrations`
-1. Click `Custom repositories`
-1. Add `https://github.com/flexopus/flexopus-hass-sensor` as type `Integration`
+1. Search and download `Flexopus` from the list
 1. Restart HA
 
 ## Manual installation
