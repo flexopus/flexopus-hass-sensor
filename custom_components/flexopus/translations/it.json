@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Autenticazione",
+                "data": {
+                    "entry_title": "Nome della voce di integrazione",
+                    "access_token": "Token di accesso Flexopus",
+                    "tenant_url": "URL dell'inquilino Flexopus"
+                },
+                "description": "Configura la tua integrazione Flexopus"
+            }
+        },
+        "error": {
+            "auth": "Il token di autenticazione fornito non è valido.",
+            "invalid_url": "L'URL fornito non è valido.",
+            "cannot_connect": "Impossibile connettersi all'URL indicato."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Recuperare le posizioni"
+                },
+                "description": "Configurare l'integrazione di Flexopus"
+            }
+        },
+        "abort": {
+            "invalid_auth": "Autenticazione non valida. Se l'URL del tuo tenat o il token API è cambiato, riconfigura l'integrazione",
+            "cannot_connect": "Flexopus non è raggiungibile. Controlla la configurazione di rete.",
+            "unknown": "Si è verificato un errore sconosciuto. Controlla i registri."
+        },
+        "error": {
+            "invalid_location": "Alcune delle posizioni configurate in precedenza non sono disponibili. Applicando una nuova configurazione, non verranno più visualizzati in Home Assistant."
+        }
+    }
+}

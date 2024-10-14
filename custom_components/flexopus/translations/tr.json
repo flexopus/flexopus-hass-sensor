@@ -5,22 +5,22 @@
                 "data": {
                     "tenant_url": "Flexopus kiracı URL'si",
                     "entry_title": "Entegrasyon girişinin adı",
-                    "access_token": "Flexopus Erişim Belirteci"
+                    "access_token": "Flexopus Erişim Jetonu"
                 },
-                "description": "Flexopus entegrasyonunuzu ayarlama",
+                "description": "Flexopus entegrasyonunuzu kurun",
                 "title": "Kimlik Doğrulama"
             }
         },
         "error": {
-            "auth": "Sağlanan kimlik doğrulama belirteci geçerli değil.",
+            "auth": "Sağlanan kimlik doğrulama jetonu geçerli değil.",
             "invalid_url": "Sağlanan url geçerli değil.",
             "cannot_connect": "Verilen url'ye bağlanılamadı."
         }
     },
     "options": {
         "abort": {
-            "cannot_connect": "Flexopus'a erişilemiyor. Ağ yapılandırmasını kontrol edin.",
-            "invalid_auth": "Geçersiz kimlik doğrulama. Tenat URL'niz veya API belirteciniz değiştiyse, lütfen entegrasyonu yeniden yapılandırın",
+            "cannot_connect": "Flexopus'a ulaşılamıyor. Ağ yapılandırmasını kontrol edin.",
+            "invalid_auth": "Geçersiz kimlik doğrulama. Eğer kiracı URL'niz veya API jetonunuz değiştiyse, lütfen entegrasyonu yeniden yapılandırın",
             "unknown": "Bilinmeyen bir hata oluştu. Lütfen günlükleri kontrol edin."
         },
         "error": {
