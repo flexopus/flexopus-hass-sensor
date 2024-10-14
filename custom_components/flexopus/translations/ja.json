@@ -1,0 +1,38 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "description": "Flexopusとの統合を設定する",
+                "data": {
+                    "entry_title": "統合エントリーの名前",
+                    "access_token": "フレクソパス・アクセストークン",
+                    "tenant_url": "FlexopusテナントURL"
+                },
+                "title": "認証"
+            }
+        },
+        "error": {
+            "auth": "指定された認証トークンが無効です。",
+            "invalid_url": "指定されたURLは無効です。",
+            "cannot_connect": "指定された URL への接続に失敗しました。"
+        }
+    },
+    "options": {
+        "abort": {
+            "invalid_auth": "認証が無効です。URL または API トークンが変更された場合は、統合を再設定してください。",
+            "cannot_connect": "Flexopusに到達できない。ネットワーク設定を確認してください。",
+            "unknown": "不明なエラーが発生しました。ログを確認してください。"
+        },
+        "error": {
+            "invalid_location": "以前に設定した場所の一部が使用できません。新しい設定を適用することで、これらの場所はホームアシスタントに表示されなくなります。"
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "ロケーションの取得"
+                },
+                "description": "Flexopusとの統合を設定する"
+            }
+        }
+    }
+}

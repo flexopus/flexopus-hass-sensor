@@ -7,7 +7,7 @@
         },
         "step": {
             "user": {
-                "title": "Hitelesítés",
+                "title": "Autentikálás",
                 "data": {
                     "entry_title": "Az integrációs bejegyzés neve",
                     "access_token": "Flexopus hozzáférési token",
@@ -27,7 +27,7 @@
             }
         },
         "abort": {
-            "invalid_auth": "Érvénytelen hitelesítés. Ha a bérlő URL-je vagy API-tokenje megváltozott, konfiguráld újra az integrációt",
+            "invalid_auth": "Érvénytelen autentikálás. Ha a tenat URL-je vagy API-tokenje megváltozott, konfiguráld újra az integrációt",
             "cannot_connect": "A Flexopus nem elérhető. Ellenőrizd a hálózati konfigurációt.",
             "unknown": "Ismeretlen hiba történt. Kérjük, ellenőrizd a naplókat."
         },

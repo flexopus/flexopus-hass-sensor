@@ -1,4 +1,8 @@
-# Flexopus integration for Home Assistant
+![Flexopus logo](https://brands.home-assistant.io/_/flexopus/dark_logo@2x.png#gh-dark-mode-only)
+![Flexopus logo](https://brands.home-assistant.io/_/flexopus/logo@2x.png#gh-light-mode-only)
+
+# Flexopus Integration
+This integration provides an interface to integrate the Flexopus office management platform for smart office automation purposes.
 
 ## ⚠️ Warning
 You need to have an active [Flexopus](https://flexopus.com) subscription with API functionality in order to use this integration. Contact [support@flexopus.com](mailto:support@flexopus.com) for more information.
