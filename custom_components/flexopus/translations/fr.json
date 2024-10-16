@@ -3,7 +3,7 @@
         "error": {
             "auth": "Le jeton d'authentification fourni n'est pas valide.",
             "invalid_url": "L'URL fournie n'est pas valide.",
-            "cannot_connect": "Échec de la connexion à l'url donnée."
+            "cannot_connect": "Échec de la connexion à l'URL donnée."
         },
         "step": {
             "user": {
@@ -19,8 +19,8 @@
     },
     "options": {
         "abort": {
-            "invalid_auth": "L'authentification n'est pas valide. Si l'URL de votre tenat ou votre jeton API a changé, veuillez reconfigurer l'intégration.",
-            "cannot_connect": "Flexopus n'est pas joignable. Vérifiez la configuration du réseau.",
+            "invalid_auth": "L'authentification n'est pas valide. Si l'URL de votre tenat ou votre jeton API a changé, veuillez reconfigurer l'intégration",
+            "cannot_connect": "Flexopus n'est pas accessible. Vérifiez la configuration du réseau.",
             "unknown": "Une erreur inconnue s'est produite. Veuillez vérifier les journaux."
         },
         "error": {
@@ -29,7 +29,7 @@
         "step": {
             "init": {
                 "data": {
-                    "locations": "Recherche de lieux"
+                    "locations": "Récupérer les emplacements"
                 },
                 "description": "Configurez votre intégration Flexopus"
             }
