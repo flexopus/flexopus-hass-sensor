@@ -1,1 +1,37 @@
-{}
+{
+    "config": {
+        "error": {
+            "auth": "Le jeton d'authentification fourni n'est pas valide.",
+            "invalid_url": "L'URL fournie n'est pas valide.",
+            "cannot_connect": "Échec de la connexion à l'url donnée."
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "Nom de l'entrée d'intégration",
+                    "access_token": "Jeton d'accès Flexopus",
+                    "tenant_url": "URL du locataire Flexopus"
+                },
+                "description": "Configurez votre intégration Flexopus"
+            }
+        }
+    },
+    "options": {
+        "abort": {
+            "invalid_auth": "L'authentification n'est pas valide. Si l'URL de votre tenat ou votre jeton API a changé, veuillez reconfigurer l'intégration.",
+            "cannot_connect": "Flexopus n'est pas joignable. Vérifiez la configuration du réseau.",
+            "unknown": "Une erreur inconnue s'est produite. Veuillez vérifier les journaux."
+        },
+        "error": {
+            "invalid_location": "Certains lieux précédemment configurés ne sont pas disponibles. En appliquant une nouvelle configuration, ils n'apparaîtront plus dans Home Assistant."
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Recherche de lieux"
+                },
+                "description": "Configurez votre intégration Flexopus"
+            }
+        }
+    }
+}
