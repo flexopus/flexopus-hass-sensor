@@ -12,7 +12,8 @@
                     "access_token": "Jeton d'accès Flexopus",
                     "tenant_url": "URL du locataire Flexopus"
                 },
-                "description": "Configurez votre intégration Flexopus"
+                "description": "Configurez votre intégration Flexopus",
+                "title": "Authentification"
             }
         }
     },
