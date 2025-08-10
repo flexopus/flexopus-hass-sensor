@@ -1,7 +1,7 @@
 {
     "config": {
         "error": {
-            "auth": "A megadott auth token nem érvényes.",
+            "auth": "A megadott hitelesítési token érvénytelen.",
             "invalid_url": "A megadott url nem érvényes.",
             "cannot_connect": "Nem sikerült csatlakozni a megadott url-hez."
         },
