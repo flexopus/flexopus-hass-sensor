@@ -1,38 +1,38 @@
 {
-  "config": {
-    "error": {
-      "auth": "The provided auth token is not valid.",
-      "invalid_url": "The provided url is not valid.",
-      "cannot_connect": "Failed to connect to the given url."
-    },
-    "step": {
-      "user": {
-        "data": {
-          "entry_title": "Name of the integration entry",
-          "access_token": "Flexopus Access Token",
-          "tenant_url": "Flexopus tenant URL"
+    "config": {
+        "error": {
+            "auth": "The provided auth token is not valid.",
+            "invalid_url": "The provided url is not valid.",
+            "cannot_connect": "Failed to connect to the given url."
         },
-        "description": "Set up your Flexopus integration",
-        "title": "Authentication"
-      }
-    }
-  },
-  "options": {
-    "abort": {
-      "invalid_auth": "Invalid athentication. If your tenat URL or API token has changed, please reconfigure the integration",
-      "cannot_connect": "Flexopus is not reachable. Check the network configuration.",
-      "unknown": "An unknown error happened. Please check the logs."
+        "step": {
+            "user": {
+                "data": {
+                    "entry_title": "Name of the integration entry",
+                    "access_token": "Flexopus Access Token",
+                    "tenant_url": "Flexopus tenant URL"
+                },
+                "description": "Set up your Flexopus integration",
+                "title": "Authentication"
+            }
+        }
     },
-    "error": {
-      "invalid_location": "Some of the previously configured locations are not available. By applying a new configuration, they will no longer show up in Home Assistant."
-    },
-    "step": {
-      "init": {
-        "data": {
-          "locations": "Fetch locations"
+    "options": {
+        "abort": {
+            "invalid_auth": "Invalid athentication. If your tenat URL or API token has changed, please reconfigure the integration",
+            "cannot_connect": "Flexopus is not reachable. Check the network configuration.",
+            "unknown": "An unknown error happened. Please check the logs."
         },
-        "description": "Configure your Flexopus integration"
-      }
+        "error": {
+            "invalid_location": "Some of the previously configured locations are not available. By applying a new configuration, they will no longer show up in Home Assistant."
+        },
+        "step": {
+            "init": {
+                "data": {
+                    "locations": "Fetch locations"
+                },
+                "description": "Configure your Flexopus integration"
+            }
+        }
     }
-  }
 }
