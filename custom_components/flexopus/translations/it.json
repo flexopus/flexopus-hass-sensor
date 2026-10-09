@@ -13,8 +13,8 @@
         },
         "error": {
             "auth": "Il token di autenticazione fornito non è valido.",
-            "invalid_url": "L'URL fornito non è valido.",
-            "cannot_connect": "Impossibile connettersi all'URL indicato."
+            "invalid_url": "L'url fornito non è valido.",
+            "cannot_connect": "Impossibile connettersi all'url indicato."
         }
     },
     "options": {
