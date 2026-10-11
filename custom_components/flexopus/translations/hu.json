@@ -27,12 +27,12 @@
             }
         },
         "abort": {
-            "invalid_auth": "Érvénytelen hitelesítés. Ha a tenat URL-je vagy API-tokenje megváltozott, konfiguráld újra az integrációt",
-            "cannot_connect": "A Flexopus nem elérhető. Ellenőrizd a hálózati beállítást.",
+            "invalid_auth": "Érvénytelen hitelesítés. Ha megváltozott a tenant URL-ed vagy az API-tokened, konfiguráld újra az integrációt",
+            "cannot_connect": "A Flexopus nem elérhető. Ellenőrizd a hálózati beállításokat.",
             "unknown": "Ismeretlen hiba történt. Kérjük, ellenőrizd a bejelentkezéseket."
         },
         "error": {
-            "invalid_location": "A korábban beállított helyek közül néhány nem elérhető. Az új konfiguráció alkalmazásával ezek már nem jelennek meg a Home asszisztensben."
+            "invalid_location": "Néhány korábban konfigurált helyszín nem érhető el. Új konfiguráció alkalmazásával ezek a helyek már nem jelennek meg a Home Assistant alkalmazásban."
         }
     }
 }
